@@ -1,7 +1,4 @@
-// Mean-centred zero-inflated Poisson log-normal model.
-//
-// X_mu, Z_sigma and W_zi are deliberately separate so the selected mean,
-// log-variance and extra-zero specifications can differ.
+// Mean-centred zero-inflated Poisson log-normal model
 
 data {
   int<lower=1> N;
