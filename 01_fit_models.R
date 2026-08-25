@@ -1,9 +1,4 @@
 # Fit the six selected Bayesian count-regression specifications.
-#
-# This is a corrected, reproducible replacement for the supplied SuppMaterial.R.
-# It assumes 00_validate_data.R has been run.
-# It does not reconstruct the full forward-selection path because the submitted
-# candidate formulas, fits, and posterior draws were not supplied.
 
 suppressPackageStartupMessages({
   library(brms)
@@ -34,7 +29,7 @@ env_integer <- function(name, default) {
   value
 }
 
-CHAINS <- env_integer("CI_CHAINS", 1L)
+CHAINS <- env_integer("CI_CHAINS", 4L)
 ITER <- env_integer("CI_ITER", 2000L)
 WARMUP <- env_integer("CI_WARMUP", 1000L)
 detected_cores <- parallel::detectCores(logical = FALSE)
@@ -157,8 +152,7 @@ fit_zinb <- fit_or_load_brms(
   )
 )
 
-# Design matrices for the custom mean-centred PLN models.  The factors and
-# references were fixed in 00_validate_data.R.
+# Design matrices for the custom mean-centred PLN models.  
 X_mu <- model.matrix(as.formula(paste0("~ ", mean_rhs)), data = ci)
 Z_sigma <- model.matrix(as.formula(paste0("~ ", dispersion_rhs)), data = ci)
 W_zi_intercept <- model.matrix(~ 1, data = ci)
