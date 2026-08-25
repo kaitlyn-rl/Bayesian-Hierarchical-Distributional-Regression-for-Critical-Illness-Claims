@@ -1,7 +1,4 @@
 // Mean-centred Poisson log-normal model for aggregated CI rating cells.
-//
-// The centring term -sigma^2/2 makes X * beta the marginal log annual rate:
-// E[y_i | beta, delta] = exposure_i * exp(X_i * beta).
 
 data {
   int<lower=1> N;
@@ -45,8 +42,5 @@ model {
 }
 
 generated quantities {
-  // Do not save the conditional p(y_i | u_i) as the model-comparison
-  // likelihood.  Marginal pointwise log likelihood for a new rating cell is
-  // computed by Gauss-Hermite quadrature in 02_marginal_waic.R.
   vector[N] annual_mean_rate = exp(eta);
 }
